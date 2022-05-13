@@ -1,9 +1,7 @@
 #ifndef __AUTHOR_HPP__
 #define __AUTHOR_HPP__
 
-using namespace std;
-#include <iostream>
-#include <string>
+#include "libraries.h"
 
 class Author
 {
