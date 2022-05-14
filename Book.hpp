@@ -13,9 +13,13 @@ class Book
   float rating;
   string ISBN;
 
+bool createBookFile(bool hasContents);
+bool deleteBookFile();
+
 public:
 string toString();
-bool saveBookInfo(string filename);
+bool createBook(string databaseFilename, bool willEnterBookContents);
+bool deleteBook(bool shouldDeleteFile);
 
 // constructors
 Book();

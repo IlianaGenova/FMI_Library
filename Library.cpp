@@ -1,7 +1,4 @@
-#include "libraries.h"
-#include "secret.h"
-
-#include "Book.hpp"
+#include "library.hpp"
 
 int main()
 {
@@ -9,6 +6,6 @@ int main()
   cout << "This is it for now \r\n" << endl;
   cout << book->toString() << endl;
 
-  book->saveBookInfo(libraryFilename);
+  book->createBook(libraryFilename, true);
 }
 

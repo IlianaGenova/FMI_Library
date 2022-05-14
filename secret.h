@@ -3,7 +3,7 @@
 
 #include "libraries.h"
 
-string adminPwd = "admnpwd";
+string masterPassword = "admnpwd";
 string libraryFilename = "library.txt";
 
 #endif

@@ -11,19 +11,33 @@ string Book::toString()
   return bookInfo.str();
 }
 
-bool Book::saveBookInfo(string filename)
+bool Book::createBook(string databaseFilename, bool willEnterBookContents)
 {
   fstream file;
-  file.open(filename, ios::in | ios::out | ios::app);
+  file.open(databaseFilename, ios::in | ios::out | ios::app);
   
   if (!file.fail()) 
   {
     file << this->toString();
+    this->createBookFile(willEnterBookContents);
     file.close();
+
     return true;
   }
   
   return false;
+}
+
+bool Book::deleteBook(bool shouldDeleteFile)
+{
+  this->~Book();
+
+  if (shouldDeleteFile)
+  {
+    return this->deleteBookFile();
+  }
+
+  return true;
 }
 
 
@@ -113,4 +127,45 @@ Book::~Book()
 {
   delete this->author;
   delete this;
+}
+
+
+// private class functions
+bool Book::createBookFile(bool hasContents)
+{
+  fstream file;
+  file.open(this->filename, ios::in | ios::out | ios::app);
+  
+  if (!file.fail()) 
+  {
+    if (hasContents)
+    {
+      string line;
+      
+      do
+      {
+        cin >> line;
+        file << line;
+      } while (line != "exit");
+    }
+
+    file.close();
+    return true;
+  }
+
+  return false;
+}
+
+bool Book::deleteBookFile()
+{
+  fstream file;
+  file.open(this->filename, ios::in | ios::out | ios::trunc);
+  
+  if (file.good())
+  {
+    file.close();
+    return true;
+  }
+
+  return false;
 }
