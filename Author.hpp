@@ -9,35 +9,16 @@ class Author
   string surname;
 
 public:
-Author::Author(string name, string surname)
-{
-  this->name = name;
-  this->surname = surname;
-}
+Author();
+Author(string name, string surname);
 
-string Author::getEntireName()
-{
-  return this->name + " " + this->surname;
-}
+string getEntireName();
+string getName();
+string getSurname();
 
-string Author::getName()
-{
-  return this->name;
-}
+void setName(string name);
+void setSurname(string surname);
 
-string Author::getSurname()
-{
-  return this->surname;
-}
-
-void Author::setName(string name)
-{
-  this->name = name;
-}
-
-void Author::setSurname(string surname)
-{
-  this->surname = surname;
-}
+~Author();
 };
 #endif
