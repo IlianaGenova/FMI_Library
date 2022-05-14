@@ -15,90 +15,24 @@ class Book
 
 public:
 // constructors
-Book::Book(){};
-Book::Book(Author* author, string title, string filename, string description, short rating, string ISBN)
-{
-  this->author = author;
-  this->title = title;
-  this->filename = filename;
-  this->description = description;
-  this->rating = rating;
-  this->ISBN = ISBN;
-}
+Book();
+Book(string name, string surname, string title, string filename, string description, short rating, string ISBN);
 
+Author* getAuthor();
+string getTitle();
+string getFilename();
+string getDescription();
+short getRating();
+string getISBN();
 
+void setAuthor(string name, string surname);
+void setTitle(string title);
+void setFilename(string filename);
+void setDescription(string descriptions);
+void setRating(short rating);
+void setISBN(string ISBN);
 
-// getter functions
-Author* Book::getAuthor()
-{
-  return this->author;
-}
-
-string Book::getTitle()
-{
-  return this->title;
-}
-
-string Book::getFilename()
-{
-  return this->filename;
-}
-
-string Book::getDescription()
-{
-  return this->description;
-}
-
-short Book::getRating()
-{
-  return this->rating;
-}
-
-string Book::getISBN()
-{
-  return this->ISBN;
-}
-
-
-
-// setter functions
-void Book::setAuthor(Author* author)
-{
-  this->author = author;
-}
-
-void Book::setTitle(string title)
-{
-  this->title = title;
-}
-
-void Book::setFilename(string filename)
-{
-  this->filename = filename;
-}
-
-void Book::setDescription(string descriptions)
-{
-  this->description = description;
-}
-
-void Book::setRating(short rating)
-{
-  this->rating = rating;
-}
-
-void Book::setISBN(string ISBN)
-{
-   this->ISBN = ISBN;
-}
-
-
-
-// destructors
-Book::~Book()
-{
-
-}
+~Book();
 };
 
 
