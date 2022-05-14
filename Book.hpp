@@ -10,26 +10,26 @@ class Book
   string title;
   string filename;
   string description;
-  short rating;
+  float rating;
   string ISBN;
 
 public:
 // constructors
 Book();
-Book(string name, string surname, string title, string filename, string description, short rating, string ISBN);
+Book(string name, string surname, string title, string filename, string description, float rating, string ISBN);
 
 Author* getAuthor();
 string getTitle();
 string getFilename();
 string getDescription();
-short getRating();
+float getRating();
 string getISBN();
 
 void setAuthor(string name, string surname);
 void setTitle(string title);
 void setFilename(string filename);
 void setDescription(string descriptions);
-void setRating(short rating);
+void setRating(float rating);
 void setISBN(string ISBN);
 
 ~Book();

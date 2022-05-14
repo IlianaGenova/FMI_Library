@@ -36,3 +36,8 @@ void Author::setSurname(string surname)
 {
   this->surname = surname;
 }
+
+
+
+// destructors
+Author::~Author(){};

@@ -2,7 +2,7 @@
 
 // constructors
 Book::Book(){};
-Book::Book(string name, string surname, string title, string filename, string description, short rating, string ISBN)
+Book::Book(string name, string surname, string title, string filename, string description, float rating, string ISBN)
 {
   this->author = new Author(name, surname);
   this->title = title;
@@ -35,7 +35,7 @@ string Book::getDescription()
   return this->description;
 }
 
-short Book::getRating()
+float Book::getRating()
 {
   return this->rating;
 }
@@ -68,7 +68,7 @@ void Book::setDescription(string descriptions)
   this->description = description;
 }
 
-void Book::setRating(short rating)
+void Book::setRating(float rating)
 {
   this->rating = rating;
 }
