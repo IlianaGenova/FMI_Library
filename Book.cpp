@@ -1,5 +1,33 @@
 #include "Book.hpp"
 
+string Book::toString()
+{
+  ostringstream bookInfo;
+
+  bookInfo << this->getTitle() << "\t" << this->getAuthor()->getEntireName() << "\t"
+            << this->getISBN() << "\t" << this -> getRating() << "\t" << this->getDescription() << "\t" 
+            << this->getFilename() << "\r\n";
+
+  return bookInfo.str();
+}
+
+bool Book::saveBookInfo(string filename)
+{
+  fstream file;
+  file.open(filename, ios::in | ios::out | ios::app);
+  
+  if (!file.fail()) 
+  {
+    file << this->toString();
+    file.close();
+    return true;
+  }
+  
+  return false;
+}
+
+
+
 // constructors
 Book::Book(){};
 Book::Book(string name, string surname, string title, string filename, string description, float rating, string ISBN)
@@ -84,4 +112,5 @@ void Book::setISBN(string ISBN)
 Book::~Book()
 {
   delete this->author;
+  delete this;
 }

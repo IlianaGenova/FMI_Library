@@ -14,6 +14,9 @@ class Book
   string ISBN;
 
 public:
+string toString();
+bool saveBookInfo(string filename);
+
 // constructors
 Book();
 Book(string name, string surname, string title, string filename, string description, float rating, string ISBN);

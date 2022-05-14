@@ -1,13 +1,14 @@
 #include "libraries.h"
-#include "Book.hpp"
+#include "secret.h"
 
-string adminPwd = "admnpwd";
-string libraryFilename = "library.txt";
+#include "Book.hpp"
 
 int main()
 {
-  // Book *book = new Book("Sonia", "Andreeva", "Wearing out", "WearingOut.txt", "A really great book", 4, "978-3-16-148410-0");
-  Book *book = new Book();
-  cout << "This is it for now" << endl;
+  Book *book = new Book("Sonia", "Andreeva", "Wearing out", "WearingOut.txt", "A really great book", 4.6, "978-3-16-148410-0");
+  cout << "This is it for now \r\n" << endl;
+  cout << book->toString() << endl;
+
+  book->saveBookInfo(libraryFilename);
 }
 
