@@ -135,6 +135,52 @@ public:
 
     file.close();
   }
+
+  vector<Book*> findBooksBy(string searchString, bool isStrict, string (Book::*method)(void))
+  {
+    vector<Book*> searchResults;
+
+    for (int i = 0; i < this->books.size(); i++)
+    {
+      if (isStrict)
+      {
+        if((this->books[i]->*method)() == searchString)
+        {
+          searchResults.push_back(this->books[i]);
+        }
+      }
+      else
+      {
+        if ((this->books[i]->*method)().find(searchString) != string::npos) 
+        {
+          searchResults.push_back(this->books[i]);
+        }
+      }
+    }  
+
+    return searchResults;
+  }
+
+  vector<Book*> findBooks(short propertyType, string property)
+  {
+    switch (propertyType)
+    {
+      case 1:
+        return findBooksBy(property, false, &Book::getTitle);
+      case 2:
+        return findBooksBy(property, false, &Book::getAuthorName);
+      case 3:
+        return findBooksBy(property, false, &Book::getISBN);
+      case 4:
+        return findBooksBy(property, true, &Book::getDescription);
+      default:
+        cout << "Could not find book by '" << property <<"'. \r\n Valid arguments are title, author, rating, description." << endl;
+        break;
+    }
+
+    vector <Book*> foundBooks;
+    return foundBooks;
+  }
 };
 
 #endif
