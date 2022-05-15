@@ -6,18 +6,33 @@
 
 #include "Book.hpp"
 
+#define DEFAULT_ROWS_TO_PRINT 10
+
 class Library
 {
   vector<Book*> books;
+  int rowNumberToPrint;
 
 public:
-  Library(){};
+  Library(){
+    this->rowNumberToPrint = DEFAULT_ROWS_TO_PRINT;
+  };
 
   ~Library()
   {
     delete this;
   }
+
+  int getRowNumberToPrint()
+  {
+    return this->rowNumberToPrint;
+  }
   
+  void setNumberOfRowsToPrint(int rows)
+  {
+    this->rowNumberToPrint = rows;
+  }
+
   bool addBookToLibrary(Book* book)
   {
     this->books.push_back(book);
@@ -78,6 +93,47 @@ public:
 
     vector <Book*> sortedBooks;
     return sortedBooks;
+  }
+
+  void readBook(Book* book, bool sentenceBySentence)
+  {
+    fstream file = fstream(book->getFilename(), ios::out);
+    int rowsToOutput = this->getRowNumberToPrint();
+    string input, output;
+
+    if (file.good() && file.is_open())
+    {
+      if (sentenceBySentence)
+      {
+        char character;
+        
+        do
+        {
+          do
+          {
+            file >> character;
+            cout << character;
+          } while (character != '?' && character != '.' && character!= '!');
+          
+          cin >> input;
+        } while (input != "exit");  
+      }
+      else
+      {
+        do
+        {
+          for (int i = 0; i < rowsToOutput; i++)
+          {
+            getline(file, output);
+            cout << output;
+          }
+          
+          cin >> input;
+        } while (input != "exit");     
+      }
+    }
+
+    file.close();
   }
 };
 
