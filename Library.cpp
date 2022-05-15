@@ -31,16 +31,16 @@ void Library::setNumberOfRowsToPrint(int rows)
 
 void Library::addBookToLibrary(Book* book)
 {
-  this->books.push_back(book);
+  this->getBooks().push_back(book);
 }
 
 void Library::removeBookFromLibrary(Book* book)
 {
-  for (int i = 0; i < this->books.size(); i++)
+  for (int i = 0; i < this->getBooks().size(); i++)
   {
-    if (this->books[i] == book)
+    if (this->getBooks()[i] == book)
     {
-      this->books.erase(this->books.begin()+i);
+      this->getBooks().erase(this->getBooks().begin()+i);
     }
   }
 }
@@ -60,9 +60,9 @@ vector<Book*> Library::sortLibraryByMethod(bool isAscending, string (Book::*meth
   vector <Book*> sortedBooks;
   Book* temporaryBookContainer;
   
-  if (this->books.size() > 0)
+  if (this->getBooks().size() > 0)
   {
-    copy(this->books.begin(), this->books.end(), sortedBooks.begin());
+    copy(this->getBooks().begin(), this->getBooks().end(), sortedBooks.begin());
     
     for (int j = 0; j < sortedBooks.size(); j++)
     {
@@ -147,20 +147,20 @@ vector<Book*> Library::findBooksBy(string searchString, bool isStrict, string (B
 {
   vector<Book*> searchResults;
 
-  for (int i = 0; i < this->books.size(); i++)
+  for (int i = 0; i < this->getBooks().size(); i++)
   {
     if (isStrict)
     {
-      if((this->books[i]->*method)() == searchString)
+      if((this->getBooks()[i]->*method)() == searchString)
       {
-        searchResults.push_back(this->books[i]);
+        searchResults.push_back(this->getBooks()[i]);
       }
     }
     else
     {
-      if ((this->books[i]->*method)().find(searchString) != string::npos) 
+      if ((this->getBooks()[i]->*method)().find(searchString) != string::npos) 
       {
-        searchResults.push_back(this->books[i]);
+        searchResults.push_back(this->getBooks()[i]);
       }
     }
   }  

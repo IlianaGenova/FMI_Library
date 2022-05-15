@@ -20,6 +20,7 @@ public:
   ~Library();
   // setter and getter
   int getRowNumberToPrint();
+  vector<Books> getBooks();
   void setNumberOfRowsToPrint(int rows);
   
   bool isReaderAuthorized(string password);
