@@ -3,10 +3,13 @@
 int main()
 {
   Library* library = new Library();
+  stringstream sstream;
   string title, description, filename, firstName, lastName, ISBN, password;
   string stringInput;
+  bool isAscending;
   char charInput;
   long rating; 
+  int rows;
 
   vector<Book*> books;
 
@@ -16,6 +19,7 @@ int main()
   {
     cout << "Here you can: \r\n - Read a book, by pressing R; \r\n - Find books, by pressing F \r\n - Sort books, by pressing S" << endl;
     cout << "If you have admin rights, you can also: \r\n - Add a book, by pressing A; \r\n - Delete a book, by pressing D" << endl;
+    cout << "You can now also leave the library, by typing 'quit'" << endl;
     cout << "Enter your choice here: ";
     cin >> charInput;
 
@@ -66,8 +70,6 @@ int main()
         cout << endl;
         break;
 
-      case 'R':
-        break;
       case 'D':
         cout<< "Now this is sad. We are losing a book! Can we just make sure you are an admin first? Type the master password in here: ";
         cin >> password;
@@ -77,7 +79,7 @@ int main()
           cout << "Well, I guess you really have to delete the book then. How is it called? You can only remove a book by it's complete and full title: ";
           cin >> title;
           cout << "Okay, let's see if we can find it." << endl;
-          books = library->findBooks(TITLE, title);
+          books = library->findBooks(P_TITLE, title);
 
           if (books.size() == 0)
           {
@@ -102,24 +104,136 @@ int main()
 
         cout << endl;
         break;
+
+      case 'R':
+        cout << "Okay, we are reading a book. Type the title here: " << endl;
+        cin >> title;
+        cout << "Okay, let's see if we can find it." << endl;
+        books = library->findBooks(P_TITLE, title);
+
+        if (books.size() == 0)
+          {
+            cout << "We could not find the book. Sorry!" << endl;
+            break;
+          }
+          else if (books.size() > 1)
+          {
+            cout << "We found several books with the name. We will let you read one of them, considering they are the same title and ISBN" << endl;
+          }
+          else if (books.size() == 1)
+          {
+            cout << "We found the one!";
+          }
+
+          cout << "Just to keep in mind - do you want to read it sentence by sentence or page by page? If you like sentences better, type S; otherwse, type in P: ";
+          cin >> charInput;
+          switch (charInput)
+          {
+            case 'P':
+              cout << "Just a little something - the default rule of the library is to display " << DEFAULT_ROWS_TO_PRINT << " lines at once. Would you like to change it? Y/N ";
+              cin >> charInput;
+              switch (charInput)
+              {
+                case 'Y':
+                  cout << "Okay. We are changing it to: ";
+                  cin >> rows;
+                  library->setNumberOfRowsToPrint(rows);
+                  cout << "Happy reading!" <<endl;
+                  break;
+                case 'N':
+                  cout << "Happy reading!" <<endl;
+                  break;
+              }
+
+              library->readBook(books[0], false);
+              break;
+            case 'S':
+              cout << "Okay then - happy reading!" << endl;
+              library->readBook(books[0], true);
+              break;
+          }
+
+        cout << endl;
+        break;
+
       case 'S':
+        cout << "Okay, we are sorting the books. (A)scending or (D)escending?";
+        cin >> charInput;
+
+        (charInput == 'A') ? isAscending = true : isAscending = false;
+
+        cout << "By (T)itle, by (A)uthor, by part of (D)escription or by (I)SBN? : ";
+        cin >> charInput;
+        cout << "Lets begin the sort.";
+
+        switch (charInput)
+        {
+          case 'T':
+            books = library->sortLibrary(isAscending, P_TITLE);
+            break;
+          case 'A':
+            books = library->sortLibrary(isAscending, P_AUTHOR);
+            break;
+          case 'I':
+            books = library->sortLibrary(isAscending, P_ISBN);
+            break;
+        }
+
+        cout << "Here are the results of the conducted sorting: " << endl;
+
+        for (int i = 0; i < books.size(); i++)
+        {
+          cout << books[i]->toString();
+        }
+
         break;
+
       case 'F':
+        cout << "Okay, we are searching for a book. By (T)itle, by (A)uthor, by part of (D)escription or by (I)SBN? : ";
+        
+        cin >> charInput;
+        cout << "Lets begin the search.";
+
+        switch (charInput)
+        {
+          case 'T':
+            cout << "Enter title: ";
+            cin >> title;
+            books = library->findBooks(P_TITLE, title);
+            break;
+          case 'A':
+            cout << "Enter author: ";
+            cin >> firstName >> lastName;
+            sstream.clear();
+            sstream << firstName << " " << lastName;
+            books = library->findBooks(P_AUTHOR, sstream.str());
+            break;
+          case 'D':
+            cout << "Enter part of description: ";
+            cin >> description;
+            books = library->findBooks(P_DESCRIPTION, description);
+            break;
+          case 'I':
+            cout << "Enter ISBN: ";
+            cin >> ISBN;
+            books = library->findBooks(P_ISBN, ISBN);
+            break;
+        }
+
+        cout << "Here are the results of the conducted search: " << endl;
+
+        for (int i = 0; i < books.size(); i++)
+        {
+          cout << books[i]->toString();
+        }
+
+        cout << endl;
         break;
+
       defaut:
         break;
     }
-      
-
-
-  } while (input != "quit");
+  } while (stringInput != "quit");
 
   cout << "Well then, toodles!" << endl;
-  
-
-  Book *book = new Book("Sonia", "Andreeva", "Wearing out", "WearingOut.txt", "A really great book", 4.6, "978-3-16-148410-0", libraryFilename, false);
-  cout << "This is it for now \r\n" << endl;
-  cout << book->toString() << endl;
-
-  book->createBook(libraryFilename, true);
 }

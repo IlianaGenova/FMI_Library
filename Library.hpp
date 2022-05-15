@@ -10,10 +10,10 @@
 
 enum PropertyType
 {
-  TITLE = 0,
-  AUTHOR,
-  ISBN,
-  DESCRIPTION
+  P_TITLE = 0,
+  P_AUTHOR,
+  P_ISBN,
+  P_DESCRIPTION
 };
 
 class Library
@@ -42,7 +42,7 @@ public:
 
   void readBook(Book* book, bool sentenceBySentence);
   
-  vector<Book*> sortLibrary(bool isAscending, short property);
+  vector<Book*> sortLibrary(bool isAscending, PropertyType property);
 
   vector<Book*> findBooks(PropertyType propertyType, string property);
 };

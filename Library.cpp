@@ -77,7 +77,7 @@ vector<Book*> Library::sortLibraryByMethod(bool isAscending, string (Book::*meth
   }
 };
 
-vector<Book*> Library::sortLibrary(bool isAscending, short property)
+vector<Book*> Library::sortLibrary(bool isAscending, PropertyType property)
 {
   switch (property)
   {
@@ -162,7 +162,7 @@ vector<Book*> Library::findBooksBy(string searchString, bool isStrict, string (B
   return searchResults;
 }
 
-vector<Book*> Library::findBooks(short propertyType, string property)
+vector<Book*> Library::findBooks(PropertyType propertyType, string property)
 {
   switch (propertyType)
   {
