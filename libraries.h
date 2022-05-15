@@ -6,5 +6,6 @@ using namespace std;
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <vector>
 
 #endif

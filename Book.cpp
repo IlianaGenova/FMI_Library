@@ -62,6 +62,12 @@ Author* Book::getAuthor()
   return this->author;
 }
 
+string Book::getAuthorName()
+{
+  Author* author = this->getAuthor();
+  return author->getEntireName();
+}
+
 string Book::getTitle()
 {
   return this->title;

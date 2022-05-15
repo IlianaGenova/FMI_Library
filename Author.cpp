@@ -11,7 +11,7 @@ Author::Author(string name, string surname)
 // getter functions
 string Author::getEntireName()
 {
-  return this->name + " " + this->surname;
+  return this->getName() + " " + this->getSurname();
 }
 
 string Author::getName()

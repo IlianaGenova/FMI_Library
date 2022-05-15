@@ -26,6 +26,7 @@ Book();
 Book(string name, string surname, string title, string filename, string description, float rating, string ISBN);
 
 Author* getAuthor();
+string getAuthorName();
 string getTitle();
 string getFilename();
 string getDescription();
