@@ -20,9 +20,12 @@ void Library::setNumberOfRowsToPrint(int rows)
   this->rowNumberToPrint = rows;
 }
 
-void Library::addBookToLibrary(Book* book)
+void Library::addBookToLibrary(string name, string surname, string title, string filename, 
+      string description, float rating, string ISBN, string databaseFilename, bool willEnterBookContents)
 {
+  Book* book = new Book(name, surname, title, filename, description, rating, ISBN, databaseFilename, willEnterBookContents);
   this->getBooks().push_back(book);
+  delete book;
 }
 
 void Library::removeBookFromLibrary(Book* book)
@@ -168,9 +171,9 @@ vector<Book*> Library::findBooks(short propertyType, string property)
     case 2:
       return findBooksBy(property, false, &Book::getAuthorName);
     case 3:
-      return findBooksBy(property, false, &Book::getISBN);
-    case 4:
       return findBooksBy(property, true, &Book::getDescription);
+    case 4:
+      return findBooksBy(property, false, &Book::getISBN);
     default:
       cout << "Could not find book by '" << property <<"'. \r\n Valid arguments are title, author, rating, description." << endl;
       break;

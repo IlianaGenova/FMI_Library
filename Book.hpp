@@ -23,7 +23,8 @@ bool deleteBook(bool shouldDeleteFile);
 
 // constructors
 Book();
-Book(string name, string surname, string title, string filename, string description, float rating, string ISBN);
+Book(string name, string surname, string title, string filename, 
+      string description, float rating, string ISBN, string databaseFilename, bool willEnterBookContents);
 
 Author* getAuthor();
 string getAuthorName();

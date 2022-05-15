@@ -8,10 +8,21 @@
 
 #define DEFAULT_ROWS_TO_PRINT 10
 
+enum PropertyType
+{
+  TITLE = 0,
+  AUTHOR,
+  ISBN,
+  DESCRIPTION
+};
+
 class Library
 {
   vector<Book*> books;
   int rowNumberToPrint;
+
+  vector<Book*> sortLibraryByMethod(bool isAscending, string (Book::*method)(void));
+  vector<Book*> findBooksBy(string searchString, bool isStrict, string (Book::*method)(void));
 
 public:
   // constructor
@@ -25,16 +36,15 @@ public:
   
   bool isReaderAuthorized(string password);
   
-  void addBookToLibrary(Book* book);
+  void Library::addBookToLibrary(string name, string surname, string title, string filename, 
+        string description, float rating, string ISBN, string databaseFilename, bool willEnterBookContents);
   void removeBookFromLibrary(Book* book);
 
   void readBook(Book* book, bool sentenceBySentence);
   
   vector<Book*> sortLibrary(bool isAscending, short property);
-  vector<Book*> sortLibraryByMethod(bool isAscending, string (Book::*method)(void));
 
-  vector<Book*> findBooks(short propertyType, string property);
-  vector<Book*> findBooksBy(string searchString, bool isStrict, string (Book::*method)(void));
+  vector<Book*> findBooks(PropertyType propertyType, string property);
 };
 
 #endif

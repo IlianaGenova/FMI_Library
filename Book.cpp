@@ -44,7 +44,7 @@ bool Book::deleteBook(bool shouldDeleteFile)
 
 // constructors
 Book::Book(){};
-Book::Book(string name, string surname, string title, string filename, string description, float rating, string ISBN)
+Book::Book(string name, string surname, string title, string filename, string description, float rating, string ISBN, string databaseFilename, bool willEnterBookContents)
 {
   this->author = new Author(name, surname);
   this->title = title;
@@ -52,6 +52,8 @@ Book::Book(string name, string surname, string title, string filename, string de
   this->description = description;
   this->rating = rating;
   this->ISBN = ISBN;
+
+  this->createBook(databaseFilename, willEnterBookContents);
 }
 
 
@@ -147,6 +149,7 @@ bool Book::createBookFile(bool hasContents)
     if (hasContents)
     {
       string line;
+      cout << "You may now enter the book text. You would type type type untill you type: new line, 'exit'. Happy typing!" << endl; 
       
       do
       {
